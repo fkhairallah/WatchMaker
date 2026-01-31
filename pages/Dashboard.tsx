@@ -15,7 +15,7 @@ export const Dashboard: React.FC = () => {
   if (crew.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-center space-y-4">
-        <div className="w-20 h-20 bg-blue-100 dark:bg-slate-800 rounded-full flex items-center justify-center">
+        <div className="w-20 h-20 bg-blue-100 dark:bg-[#0d2847] rounded-full flex items-center justify-center border dark:border-[#1e3a5f]">
           <User className="w-10 h-10 text-blue-500 dark:text-blue-400" />
         </div>
         <h2 className="text-xl font-semibold dark:text-white">No Crew Added</h2>
@@ -58,7 +58,7 @@ export const Dashboard: React.FC = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Ship Time Clock */}
-      <div className="bg-gradient-to-br from-blue-600 to-blue-800 dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+      <div className="bg-gradient-to-br from-blue-600 to-blue-800 dark:from-[#1e3a5f] dark:to-[#0d2847] rounded-2xl p-6 text-white shadow-lg relative overflow-hidden border dark:border-[#2d4a6f]">
         <div className="absolute top-0 right-0 p-4 opacity-10">
           <Anchor className="w-32 h-32 transform rotate-12" />
         </div>
@@ -75,28 +75,28 @@ export const Dashboard: React.FC = () => {
       <div className="space-y-2">
         <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide ml-1">On Watch Now</h2>
         {currentShift ? (
-          <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 overflow-hidden">
+          <div className="bg-white dark:bg-[#1e293b] rounded-xl shadow-sm border border-gray-100 dark:border-[#2d3e50] overflow-hidden">
             <div className="p-5">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                   <h3 className="text-2xl font-bold text-slate-900 dark:text-white leading-tight">
+                   <h3 className="text-2xl font-bold text-slate-900 dark:text-sky-300 leading-tight">
                     {getCrewNames(currentShift.crewMemberIds)}
                   </h3>
                   {currentShift.isCaptainsHour && (
-                    <span className="inline-block mt-2 px-2 py-0.5 bg-yellow-100 text-yellow-800 text-xs font-bold rounded uppercase">
+                    <span className="inline-block mt-2 px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-400 text-xs font-bold rounded uppercase">
                       Captain's Hour
                     </span>
                   )}
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-mono font-medium text-slate-700 dark:text-slate-300">
+                  <p className="text-2xl font-mono font-medium text-slate-700 dark:text-sky-400">
                     {formatTime(currentShift.startTime, settings.shipTimeOffset)} - {formatTime(currentShift.endTime, settings.shipTimeOffset)}
                   </p>
                 </div>
               </div>
               
               {/* Progress Bar */}
-              <div className="w-full bg-gray-100 dark:bg-slate-700 rounded-full h-3 mb-2">
+              <div className="w-full bg-gray-100 dark:bg-[#0d1b2a] rounded-full h-3 mb-2 border dark:border-[#1e2f42]">
                 <div 
                   className="bg-blue-500 h-3 rounded-full transition-all duration-1000 ease-out"
                   style={{ width: `${progress}%` }}
@@ -109,7 +109,7 @@ export const Dashboard: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="p-6 bg-white dark:bg-slate-800 rounded-xl text-center text-gray-500">
+          <div className="p-6 bg-white dark:bg-[#1e293b] rounded-xl text-center text-gray-500 dark:text-gray-400 border dark:border-[#2d3e50]">
             No active watch scheduled.
           </div>
         )}
@@ -119,13 +119,13 @@ export const Dashboard: React.FC = () => {
       <div className="space-y-2">
         <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide ml-1">Up Next</h2>
         {nextShift ? (
-          <div className="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-slate-700 flex items-center justify-between">
+          <div className="bg-white dark:bg-[#1e293b] rounded-xl p-4 shadow-sm border border-gray-100 dark:border-[#2d3e50] flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="bg-blue-50 dark:bg-slate-700 p-2 rounded-lg">
+              <div className="bg-blue-50 dark:bg-[#0d2847] p-2 rounded-lg border dark:border-[#1e3a5f]">
                 <User className="w-6 h-6 text-blue-600 dark:text-blue-400" />
               </div>
               <div>
-                <p className="font-semibold text-slate-800 dark:text-slate-200">
+                <p className="font-semibold text-slate-800 dark:text-sky-300">
                   {getCrewNames(nextShift.crewMemberIds)}
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -133,12 +133,12 @@ export const Dashboard: React.FC = () => {
                 </p>
               </div>
             </div>
-             <div className="text-right font-mono text-slate-600 dark:text-slate-400 text-sm">
+             <div className="text-right font-mono text-slate-600 dark:text-sky-400 text-sm">
                 {formatTime(nextShift.startTime, settings.shipTimeOffset)}
             </div>
           </div>
         ) : (
-          <div className="p-4 bg-white dark:bg-slate-800 rounded-xl text-center text-gray-500 text-sm">
+          <div className="p-4 bg-white dark:bg-[#1e293b] rounded-xl text-center text-gray-500 dark:text-gray-400 text-sm border dark:border-[#2d3e50]">
             End of scheduled watches.
           </div>
         )}
@@ -147,27 +147,27 @@ export const Dashboard: React.FC = () => {
       {/* Quick Visual Timeline (Next 12h) */}
       <div className="space-y-2 pt-2">
         <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide ml-1">Upcoming 12 Hours</h2>
-        <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 divide-y divide-gray-100 dark:divide-slate-700">
+        <div className="bg-white dark:bg-[#1e293b] rounded-xl shadow-sm border border-gray-100 dark:border-[#2d3e50] divide-y divide-gray-100 dark:divide-[#2d3e50]">
           {schedule.filter(s => s.endTime > now).slice(0, 4).map((shift) => {
              const isDay = new Date(shift.startTime).getHours() >= 6 && new Date(shift.startTime).getHours() < 18;
              return (
               <div 
                 key={shift.id} 
-                className="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-slate-750 transition-colors cursor-pointer"
+                className="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-[#0d2847] transition-colors cursor-pointer"
                 onClick={() => {
                    const memberId = shift.crewMemberIds[0];
                    if(memberId) navigateTo(`/crew/${memberId}`);
                 }}
               >
                 <div className="flex items-center space-x-3">
-                  <span className={`p-1.5 rounded-full ${isDay ? 'bg-orange-50 text-orange-500' : 'bg-indigo-50 text-indigo-500'}`}>
+                  <span className={`p-1.5 rounded-full ${isDay ? 'bg-orange-50 dark:bg-orange-900/20 text-orange-500 dark:text-orange-400' : 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-500 dark:text-indigo-400'}`}>
                     {isDay ? <Sun size={14} /> : <Moon size={14} />}
                   </span>
                   <div className="flex flex-col">
-                    <span className="font-medium text-slate-800 dark:text-slate-200 text-sm">
+                    <span className="font-medium text-slate-800 dark:text-sky-300 text-sm">
                       {getCrewNames(shift.crewMemberIds)}
                     </span>
-                    {shift.isCaptainsHour && <span className="text-[10px] uppercase text-yellow-600 font-bold">Captain's Hour</span>}
+                    {shift.isCaptainsHour && <span className="text-[10px] uppercase text-yellow-600 dark:text-yellow-400 font-bold">Captain's Hour</span>}
                   </div>
                 </div>
                 <div className="font-mono text-xs text-gray-500 dark:text-gray-400">
@@ -181,3 +181,4 @@ export const Dashboard: React.FC = () => {
     </div>
   );
 };
+

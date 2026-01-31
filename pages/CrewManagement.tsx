@@ -27,7 +27,7 @@ export const CrewManagement: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-slate-800 dark:text-white">Crew List</h1>
+        <h1 className="text-2xl font-bold text-slate-800 dark:text-sky-300">Crew List</h1>
         <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
           {crew.length} Active
         </span>
@@ -39,7 +39,7 @@ export const CrewManagement: React.FC = () => {
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
           placeholder="Enter crew name..."
-          className="flex-1 rounded-lg border-gray-300 dark:border-slate-600 dark:bg-slate-800 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 px-4 py-2"
+          className="flex-1 rounded-lg border-gray-300 dark:border-[#2d3e50] dark:bg-[#1e293b] dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 px-4 py-2"
         />
         <button
           type="submit"
@@ -54,7 +54,7 @@ export const CrewManagement: React.FC = () => {
         {crew.map((member, index) => (
           <div
             key={member.id}
-            className="group bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-gray-200 dark:border-slate-700 flex items-center justify-between transition-all"
+            className="group bg-white dark:bg-[#1e293b] p-4 rounded-xl shadow-sm border border-gray-200 dark:border-[#2d3e50] flex items-center justify-between transition-all"
           >
             <div className="flex items-center space-x-4 cursor-pointer" onClick={() => navigateTo(`/crew/${member.id}`)}>
               <div className="flex flex-col space-y-1">
@@ -74,12 +74,12 @@ export const CrewManagement: React.FC = () => {
                 </button>
               </div>
               
-              <div className="bg-gray-100 dark:bg-slate-700 p-2.5 rounded-full">
-                <User className="w-5 h-5 text-gray-600 dark:text-gray-300" />
+              <div className="bg-gray-100 dark:bg-[#0d2847] p-2.5 rounded-full border dark:border-[#1e3a5f]">
+                <User className="w-5 h-5 text-gray-600 dark:text-sky-400" />
               </div>
               
               <div className="flex flex-col">
-                <span className="font-semibold text-slate-800 dark:text-white text-lg">{member.name}</span>
+                <span className="font-semibold text-slate-800 dark:text-sky-300 text-lg">{member.name}</span>
                 <span className="text-xs text-gray-500 dark:text-gray-400">Position #{index + 1} in rotation</span>
               </div>
             </div>
@@ -95,16 +95,17 @@ export const CrewManagement: React.FC = () => {
         ))}
         
         {crew.length === 0 && (
-          <div className="text-center py-10 border-2 border-dashed border-gray-300 dark:border-slate-700 rounded-xl">
+          <div className="text-center py-10 border-2 border-dashed border-gray-300 dark:border-[#2d3e50] rounded-xl">
             <p className="text-gray-500 dark:text-gray-400">No crew members yet.</p>
           </div>
         )}
       </div>
 
-      <div className="bg-blue-50 dark:bg-slate-800/50 p-4 rounded-lg text-sm text-blue-800 dark:text-blue-300">
+      <div className="bg-blue-50 dark:bg-[#0d2847]/50 p-4 rounded-lg text-sm text-blue-800 dark:text-blue-300 border dark:border-[#1e3a5f]">
         <p className="font-medium mb-1">Tip:</p>
         <p>Order matters! The rotation will follow the sequence shown above. Use the arrows to reorder.</p>
       </div>
     </div>
   );
 };
+
