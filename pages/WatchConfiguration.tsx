@@ -23,9 +23,9 @@ export const WatchConfiguration: React.FC = () => {
 
   return (
     <div className="space-y-8 animate-fade-in pb-10">
-      <h1 className="text-2xl font-bold text-slate-800 dark:text-sky-300">Watch Schedule</h1>
+      <h1 className="text-2xl font-bold text-slate-800 dark:text-white">Watch Schedule</h1>
 
-      <section className="bg-white dark:bg-[#1e293b] rounded-xl shadow-sm border border-gray-200 dark:border-[#2d3e50] overflow-hidden">
+      <section className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-gray-200 dark:border-slate-700 overflow-hidden">
         <div className="p-6 space-y-6">
           
           {/* Watch Duration */}
@@ -39,7 +39,7 @@ export const WatchConfiguration: React.FC = () => {
                   className={`py-2 px-3 rounded-lg text-sm font-medium transition-all ${
                     config.watchDurationHours === hours
                       ? 'bg-blue-600 text-white shadow-md'
-                      : 'bg-gray-100 dark:bg-[#0d2847] text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#1e3a5f] border dark:border-[#2d4a6f]'
+                      : 'bg-gray-100 dark:bg-slate-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-600'
                   }`}
                 >
                   {hours} hours
@@ -49,7 +49,7 @@ export const WatchConfiguration: React.FC = () => {
             <p className="text-xs text-gray-500 mt-2">Common schedules: 3h (fast rotation), 4h (standard), 6h (long rest).</p>
           </div>
 
-          <hr className="border-gray-100 dark:border-[#2d3e50]" />
+          <hr className="border-gray-100 dark:border-slate-700" />
 
           {/* Start Time/Date */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -59,7 +59,7 @@ export const WatchConfiguration: React.FC = () => {
                 type="date"
                 value={config.startDate.split('T')[0]}
                 onChange={handleDateChange}
-                className="w-full rounded-lg border-gray-300 dark:border-[#2d3e50] dark:bg-[#0d2847] dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2"
+                className="w-full rounded-lg border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2"
               />
             </div>
             <div>
@@ -68,16 +68,16 @@ export const WatchConfiguration: React.FC = () => {
                 type="time"
                 value={config.startTime}
                 onChange={handleTimeChange}
-                className="w-full rounded-lg border-gray-300 dark:border-[#2d3e50] dark:bg-[#0d2847] dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2"
+                className="w-full rounded-lg border-gray-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2"
               />
             </div>
           </div>
 
           {/* Captain's Hour */}
-          <div className="flex items-center justify-between bg-gray-50 dark:bg-[#0d2847] p-4 rounded-lg border dark:border-[#1e3a5f]">
+          <div className="flex items-center justify-between bg-gray-50 dark:bg-slate-750 p-4 rounded-lg">
             <div>
               <div className="flex items-center space-x-2">
-                 <h3 className="text-sm font-medium text-slate-800 dark:text-sky-300">Captain's Hour</h3>
+                 <h3 className="text-sm font-medium text-slate-800 dark:text-white">Captain's Hour</h3>
                  <span className="text-[10px] bg-yellow-100 text-yellow-800 px-1.5 py-0.5 rounded font-bold uppercase">All Hands</span>
               </div>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Everyone is awake for 1 hour daily.</p>
@@ -87,7 +87,7 @@ export const WatchConfiguration: React.FC = () => {
                   disabled={!config.captainsHourEnabled}
                   value={config.captainsHourStart}
                   onChange={(e) => updateConfig({ captainsHourStart: Number(e.target.value) })}
-                  className="text-sm rounded border-gray-300 dark:border-[#2d3e50] dark:bg-[#1e293b] px-2 py-1 dark:text-white"
+                  className="text-sm rounded border-gray-300 dark:border-slate-600 dark:bg-slate-700 px-2 py-1"
                >
                  {Array.from({length: 24}).map((_, i) => (
                    <option key={i} value={i}>{i.toString().padStart(2,'0')}:00</option>
@@ -95,7 +95,7 @@ export const WatchConfiguration: React.FC = () => {
                </select>
                <button
                   onClick={() => updateConfig({ captainsHourEnabled: !config.captainsHourEnabled })}
-                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${config.captainsHourEnabled ? 'bg-blue-600' : 'bg-gray-200 dark:bg-[#0d2847] dark:border dark:border-[#1e3a5f]'}`}
+                  className={`relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${config.captainsHourEnabled ? 'bg-blue-600' : 'bg-gray-200 dark:bg-slate-600'}`}
                 >
                   <span
                     className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${config.captainsHourEnabled ? 'translate-x-5' : 'translate-x-0'}`}
@@ -140,4 +140,3 @@ export const WatchConfiguration: React.FC = () => {
     </div>
   );
 };
-

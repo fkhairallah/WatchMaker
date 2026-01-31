@@ -43,18 +43,18 @@ export const CrewDetail: React.FC = () => {
       </button>
 
       <div>
-        <h1 className="text-3xl font-bold text-slate-800 dark:text-sky-300">{member.name}</h1>
+        <h1 className="text-3xl font-bold text-slate-800 dark:text-white">{member.name}</h1>
         <p className="text-gray-500 dark:text-gray-400">Personal Watch Schedule</p>
       </div>
 
       <div className="space-y-6">
         {Object.keys(shiftsByDay).length === 0 && (
-            <div className="p-4 bg-gray-100 dark:bg-[#1e293b] rounded text-center border dark:border-[#2d3e50]">No shifts assigned.</div>
+            <div className="p-4 bg-gray-100 dark:bg-slate-800 rounded text-center">No shifts assigned.</div>
         )}
         
         {Object.entries(shiftsByDay).map(([day, shifts]) => (
           <div key={day} className="space-y-2">
-            <h3 className="sticky top-16 z-10 bg-gray-50/95 dark:bg-[#0a1929]/95 backdrop-blur py-2 px-1 text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide border-b border-gray-200 dark:border-[#2d3e50]">
+            <h3 className="sticky top-16 z-10 bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur py-2 px-1 text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide border-b border-gray-200 dark:border-slate-800">
               {day}
             </h3>
             <div className="grid grid-cols-1 gap-3">
@@ -65,12 +65,12 @@ export const CrewDetail: React.FC = () => {
                         key={shift.id} 
                         className={`p-4 rounded-xl border flex justify-between items-center transition-transform hover:scale-[1.01] ${
                             isNight 
-                            ? 'bg-[#0d2847] border-[#1e3a5f] text-white' 
-                            : 'bg-white border-gray-200 text-slate-800 dark:bg-[#1e293b] dark:border-[#2d3e50] dark:text-slate-100'
+                            ? 'bg-slate-800 border-slate-700 text-white' 
+                            : 'bg-white border-gray-200 text-slate-800 dark:bg-slate-700 dark:border-slate-600 dark:text-slate-100'
                         }`}
                     >
                     <div className="flex items-center space-x-4">
-                        <div className={`p-2 rounded-lg ${isNight ? 'bg-[#1e3a5f] border border-[#2d4a6f]' : 'bg-blue-50 dark:bg-[#0d2847] dark:border dark:border-[#1e3a5f]'}`}>
+                        <div className={`p-2 rounded-lg ${isNight ? 'bg-slate-700' : 'bg-blue-50 dark:bg-slate-600'}`}>
                         <Clock className={`w-5 h-5 ${isNight ? 'text-blue-300' : 'text-blue-600 dark:text-blue-300'}`} />
                         </div>
                         <div>
@@ -97,4 +97,3 @@ export const CrewDetail: React.FC = () => {
     </div>
   );
 };
-

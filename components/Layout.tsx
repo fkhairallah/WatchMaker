@@ -18,9 +18,9 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
   };
 
   return (
-    <div className={`min-h-screen flex flex-col ${settings.theme === 'dark' ? 'dark' : ''}`} style={{ backgroundColor: settings.theme === 'dark' ? '#0a1929' : '#f3f4f6' }}>
+    <div className={`min-h-screen flex flex-col ${settings.theme === 'dark' ? 'dark bg-slate-900 text-white' : 'bg-gray-50'}`}>
       {/* Top Header */}
-      <header className="sticky top-0 z-20 bg-white/80 dark:bg-[#1e293b]/95 backdrop-blur-md border-b border-gray-200 dark:border-[#2d3e50] px-4 py-3 shadow-sm">
+      <header className="sticky top-0 z-20 bg-white/80 dark:bg-slate-900/90 backdrop-blur-md border-b border-gray-200 dark:border-slate-800 px-4 py-3 shadow-sm">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Anchor className="w-6 h-6 text-blue-600 dark:text-blue-400" />
@@ -35,12 +35,12 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 w-full max-w-3xl mx-auto p-4 pb-24" style={{ backgroundColor: settings.theme === 'dark' ? '#0a1929' : '#f3f4f6' }}>
+      <main className="flex-1 w-full max-w-3xl mx-auto p-4 pb-24">
         {children}
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 left-0 w-full z-30 bg-white dark:bg-[#1e293b] border-t border-gray-200 dark:border-[#2d3e50] pb-safe">
+      <nav className="fixed bottom-0 left-0 w-full z-30 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 pb-safe">
         <div className="max-w-3xl mx-auto h-16 flex items-center justify-around px-2">
           <a href="#/" className={navClass({ isActive: isActive('/', true) })}>
             <Home className="w-6 h-6" />
@@ -63,4 +63,3 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     </div>
   );
 };
-
