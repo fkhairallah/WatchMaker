@@ -6,7 +6,7 @@ import { Share } from '@capacitor/share';
 import { useApp } from '../context/AppContext';
 import { formatTime, generateSchedule } from '../utils/scheduleLogic';
 import { generateScheduleHtml } from '../utils/scheduleHtmlGenerator';
-import { User, Anchor, Sun, Moon, CalendarDays, X, Printer, Share2 } from 'lucide-react';
+import { User, Anchor, Sun, Moon, CalendarDays, X, Printer, Share2, ChevronRight } from 'lucide-react';
 
 const formatDuration = (ms: number): string => {
   const totalMinutes = Math.ceil(ms / 60000);
@@ -78,14 +78,6 @@ export const Dashboard: React.FC = () => {
   const currentShiftIndex = schedule.findIndex(s => s.startTime <= now && s.endTime > now);
   const currentShift = currentShiftIndex !== -1 ? schedule[currentShiftIndex] : null;
 
-  // Find next shift logic
-  let nextShift = null;
-  if (currentShiftIndex !== -1 && currentShiftIndex + 1 < schedule.length) {
-    nextShift = schedule[currentShiftIndex + 1];
-  } else if (currentShiftIndex === -1) {
-    nextShift = schedule.find(s => s.startTime > now) || null;
-  }
-
   // Calculate progress of current shift
   let progress = 0;
   if (currentShift) {
@@ -112,15 +104,6 @@ export const Dashboard: React.FC = () => {
           <p className="text-blue-200 text-xs mt-2">UTC {effectiveOffset >= 0 ? '+' : ''}{effectiveOffset} offset</p>
         </div>
       </div>
-
-      {/* View Full Schedule */}
-      <button
-        onClick={viewFullSchedule}
-        className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-blue-200 dark:border-slate-600 text-blue-600 dark:text-blue-400 font-semibold text-sm hover:bg-blue-50 dark:hover:bg-slate-700 transition-colors"
-      >
-        <CalendarDays className="w-4 h-4" />
-        View Full Schedule
-      </button>
 
       {/* Current Watch Card */}
       <div className="space-y-2">
@@ -166,40 +149,20 @@ export const Dashboard: React.FC = () => {
         )}
       </div>
 
-      {/* Next Watch Card */}
-      <div className="space-y-2">
-        <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Up Next</h2>
-        {nextShift ? (
-          <div className="bg-white dark:bg-slate-700 rounded-xl p-4 shadow-sm border border-gray-200 dark:border-slate-600 flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="bg-blue-50 dark:bg-slate-700 p-2 rounded-lg">
-                <User className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-              </div>
-              <div>
-                <p className="font-semibold text-slate-800 dark:text-slate-200">
-                  {getCrewNames(nextShift.crewMemberIds)}
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  starts in {formatDuration(nextShift.startTime - now)}
-                </p>
-              </div>
-            </div>
-            <div className="text-right font-mono text-slate-600 dark:text-slate-400 text-sm">
-              {formatTime(nextShift.startTime, effectiveOffset, settings.use24Hour)}
-            </div>
-          </div>
-        ) : (
-          <div className="p-4 bg-white dark:bg-slate-700 rounded-xl text-center text-gray-500 text-sm">
-            End of scheduled watches.
-          </div>
-        )}
-      </div>
-
       {/* Quick Visual Timeline (Next 12h) */}
       <div className="space-y-2 pt-2">
-        <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Upcoming 12 Hours</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Upcoming 12 Hours</h2>
+          <button
+            onClick={viewFullSchedule}
+            className="flex items-center gap-1.5 text-xs text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+          >
+            <CalendarDays className="w-3.5 h-3.5" />
+            View/Print Full Schedule
+          </button>
+        </div>
         <div className="bg-white dark:bg-slate-700 rounded-xl shadow-sm border border-gray-200 dark:border-slate-600 divide-y divide-gray-100 dark:divide-slate-600">
-          {schedule.filter(s => s.endTime > now).slice(0, 4).map((shift) => {
+          {schedule.filter(s => s.startTime > now && s.startTime < now + 12 * 3_600_000).map((shift) => {
             const shipHour = new Date(shift.startTime + effectiveOffset * 3_600_000).getUTCHours();
             const isDay = shipHour >= 6 && shipHour < 18;
             return (
@@ -222,8 +185,11 @@ export const Dashboard: React.FC = () => {
                     {shift.isCaptainsHour && <span className="text-[10px] uppercase text-yellow-600 font-bold">Captain's Hour</span>}
                   </div>
                 </div>
-                <div className="font-mono text-xs text-gray-500 dark:text-gray-400">
-                  {formatTime(shift.startTime, effectiveOffset, settings.use24Hour)} - {formatTime(shift.endTime, effectiveOffset, settings.use24Hour)}
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs text-gray-500 dark:text-gray-400">
+                    {formatTime(shift.startTime, effectiveOffset, settings.use24Hour)} - {formatTime(shift.endTime, effectiveOffset, settings.use24Hour)}
+                  </span>
+                  <ChevronRight className="w-4 h-4 text-gray-400 dark:text-slate-500 shrink-0" />
                 </div>
               </div>
             );

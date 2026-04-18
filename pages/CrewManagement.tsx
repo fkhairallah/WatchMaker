@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useApp } from '../context/AppContext';
-import { Trash2, GripVertical, Plus, User } from 'lucide-react';
+import { Trash2, GripVertical, Plus, User, ChevronRight } from 'lucide-react';
 
 export const CrewManagement: React.FC = () => {
   const { crew, addCrewMember, removeCrewMember, reorderCrew, navigateTo } = useApp();
@@ -90,7 +90,7 @@ export const CrewManagement: React.FC = () => {
             )}
             <div
               ref={el => { itemRefs.current[index] = el; }}
-              className={`bg-white dark:bg-slate-700 p-4 rounded-xl shadow-sm border flex items-center justify-between ${
+              className={`bg-white dark:bg-slate-700 px-3 py-3 rounded-xl shadow-sm border flex items-center gap-1 ${
                 dragIndex === index
                   ? 'opacity-30 scale-[0.97] border-gray-200 dark:border-slate-600'
                   : 'border-gray-200 dark:border-slate-600'
@@ -101,35 +101,34 @@ export const CrewManagement: React.FC = () => {
                 zIndex: dragIndex === index ? 0 : 1,
               }}
             >
-            <div className="flex items-center space-x-4">
-              <button
-                onPointerDown={(e) => onDragStart(e, index)}
-                onPointerMove={onDragMove}
-                onPointerUp={onDragEnd}
-                onPointerCancel={onDragEnd}
-                className="touch-none cursor-grab active:cursor-grabbing p-1 text-gray-400 dark:text-gray-500 hover:text-blue-500"
-                aria-label="Drag to reorder"
-              >
-                <GripVertical className="w-5 h-5" />
-              </button>
+            <button
+              onPointerDown={(e) => onDragStart(e, index)}
+              onPointerMove={onDragMove}
+              onPointerUp={onDragEnd}
+              onPointerCancel={onDragEnd}
+              className="touch-none cursor-grab active:cursor-grabbing p-1 shrink-0 text-gray-400 dark:text-gray-500 hover:text-blue-500"
+              aria-label="Drag to reorder"
+            >
+              <GripVertical className="w-5 h-5" />
+            </button>
 
-              <div
-                className="flex items-center space-x-3 cursor-pointer"
-                onClick={() => dragIndex === null && navigateTo(`/crew/${member.id}`)}
-              >
-                <div className="bg-gray-100 dark:bg-slate-600 p-2.5 rounded-full">
-                  <User className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-semibold text-slate-800 dark:text-white text-lg">{member.name}</span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">Position #{index + 1} in rotation</span>
-                </div>
+            <div
+              className="flex items-center gap-3 flex-1 min-w-0 py-1 cursor-pointer"
+              onClick={() => dragIndex === null && navigateTo(`/crew/${member.id}`)}
+            >
+              <div className="bg-gray-100 dark:bg-slate-600 p-2.5 rounded-full shrink-0">
+                <User className="w-5 h-5 text-gray-600 dark:text-gray-300" />
               </div>
+              <div className="flex flex-col min-w-0">
+                <span className="font-semibold text-slate-800 dark:text-white text-lg leading-tight">{member.name}</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">Position #{index + 1} in rotation</span>
+              </div>
+              <ChevronRight className="w-4 h-4 text-gray-400 dark:text-slate-500 shrink-0 ml-auto" />
             </div>
 
             <button
               onClick={() => removeCrewMember(member.id)}
-              className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
+              className="p-2 shrink-0 text-gray-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors"
               aria-label="Remove crew member"
             >
               <Trash2 className="w-5 h-5" />
